@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Pessoa {
@@ -17,6 +19,18 @@ public class Pessoa {
 	private String email;
 	private Integer idade;
 	private String dataNascimento;
+	private Boolean isVacinada;
+	@ManyToOne
+	@JoinColumn(name = "codigo_grupo_prioridade")
+	private GruposPrioridades gruposPrioridades;
+
+	public GruposPrioridades getGruposPrioridades() {
+		return gruposPrioridades;
+	}
+
+	public void setGruposPrioridades(GruposPrioridades gruposPrioridades) {
+		this.gruposPrioridades = gruposPrioridades;
+	}
 
 	public Long getCodigo() {
 		return codigo;
@@ -74,6 +88,14 @@ public class Pessoa {
 		this.dataNascimento = dataNascimento;
 	}
 
+	public Boolean getIsVacinada() {
+		return isVacinada;
+	}
+
+	public void setIsVacinada(Boolean isVacinada) {
+		this.isVacinada = isVacinada;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,7 +104,9 @@ public class Pessoa {
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((gruposPrioridades == null) ? 0 : gruposPrioridades.hashCode());
 		result = prime * result + ((idade == null) ? 0 : idade.hashCode());
+		result = prime * result + ((isVacinada == null) ? 0 : isVacinada.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
@@ -117,10 +141,20 @@ public class Pessoa {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (gruposPrioridades == null) {
+			if (other.gruposPrioridades != null)
+				return false;
+		} else if (!gruposPrioridades.equals(other.gruposPrioridades))
+			return false;
 		if (idade == null) {
 			if (other.idade != null)
 				return false;
 		} else if (!idade.equals(other.idade))
+			return false;
+		if (isVacinada == null) {
+			if (other.isVacinada != null)
+				return false;
+		} else if (!isVacinada.equals(other.isVacinada))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -138,7 +172,8 @@ public class Pessoa {
 	@Override
 	public String toString() {
 		return "Pessoa [codigo=" + codigo + ", nome=" + nome + ", cpf=" + cpf + ", telefone=" + telefone + ", email="
-				+ email + ", idade=" + idade + ", dataNascimento=" + dataNascimento + "]";
+				+ email + ", idade=" + idade + ", dataNascimento=" + dataNascimento + ", isVacinada=" + isVacinada
+				+ ", gruposPrioridades=" + gruposPrioridades + "]";
 	}
 	
 }
