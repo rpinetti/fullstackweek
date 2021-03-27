@@ -41,7 +41,7 @@ export default class ListaPessoas extends Component {
 
     render() {
         return(
-            <div className="container">
+            <div className="container" style={{ padding: '0 50px' }}>
                 <h2>Pessoas Cadastradas</h2>
                 <div className="container">
                     <Table dataSource={this.state.pessoas}>
